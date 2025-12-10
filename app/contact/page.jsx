@@ -3,6 +3,7 @@ export default function ContactPage() {
   return (
     <section className="min-h-screen flex items-center justify-center p-10">
       <h1 className="text-4xl font-bold text-blue-600">Contact Us</h1>
+      <p>We would love to hear from you! Please reach out with any questions, comments, or support inquiries.</p>
     </section>
   );
 }
