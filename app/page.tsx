@@ -57,7 +57,7 @@ export default function Home() {
 <aside className="relative rounded-lg overflow-hidden bg-white/80 dark:bg-white/5 shadow h-[400px] md:h-[500px] flex flex-col">
   
   {/* Image Container - Takes up most of the space */}
-  <div className="relative flex-1">
+  <div className="relative h-[250px] md:h-[300px]">
     <Image
       src="/donateImage.jpg"
       alt="School children learning together"
@@ -66,7 +66,7 @@ export default function Home() {
       priority
       sizes="(max-width: 768px) 100vw, 50vw"
     />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+    <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
   </div>
   
   {/* Quote Footer - Positioned at the base */}

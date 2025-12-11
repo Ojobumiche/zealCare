@@ -15,7 +15,7 @@ export default function ContactSection() {
 
           {/* WhatsApp Button */}
           <a
-            href="https://wa.me/+23188672719,  +231777253865"
+            href="https://wa.me/2349097228224"
             target="_blank"
             className="flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl mb-4 w-max"
           >
@@ -40,7 +40,7 @@ export default function ContactSection() {
           </h3>
 
           <form
-            action="https://formsubmit.co/zealcare24@gmail.com"
+            action="https://formsubmit.co/josoftcreative@gmail.com"
             method="POST"
             className="space-y-4"
           >

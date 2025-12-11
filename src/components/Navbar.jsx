@@ -13,12 +13,12 @@ export default function Navbar() {
   const [isMobileProgramOpen, setIsMobileProgramOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur border-b border-black/[.06] shadow z-50">
+    <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur border-b border-black/6 shadow z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
         
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-3 min-w-0">
-          <div className="relative h-10 w-[160px] shrink-0">
+          <div className="relative h-10 w-40 shrink-0">
             <Image
               src="/logo.png"
               fill
@@ -226,7 +226,7 @@ export default function Navbar() {
               <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 max-h-[80vh] overflow-y-auto">
                 {/* Image Section */}
                 <div className="relative w-full h-auto min-h-[300px] md:min-h-[400px]">
-                  <div className="relative aspect-[4/3] w-full max-w4xl max-auto">
+                  <div className="relative aspect-4/3 w-full max-w4xl max-auto">
                   <Image
                     src="/supportive.jpg"  // Use your image path
                     alt="Educational Sponsorship"
@@ -238,7 +238,7 @@ export default function Navbar() {
                 </div>
 
     {/* Content Section */}
-    <div className="p-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-b-2xl">
+    <div className="p-6 bg-linear-to-r from-blue-600 to-blue-800 text-white rounded-b-2xl">
       <div className="mb-6">
         <h1 className="inline-block text-2xl md:text-3xl font-bold">
           <span className="bg-yellow-400 text-blue-600 px-4 py-2 rounded-lg shadow-lg">

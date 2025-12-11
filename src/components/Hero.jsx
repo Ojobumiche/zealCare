@@ -17,6 +17,7 @@ export default function Hero() {
           backgroundImage: "url('/children1.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
+          borderImageWidth:"(max-width:768px) 100vw, 1200px"
         }}
       />
       
