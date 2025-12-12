@@ -28,7 +28,7 @@ export default function Navbar() {
               sizes="160px"
             />
           </div>
-          <span className="font-bold text-lg sm:text-xl text-orange-600">ZealCare</span>
+          <span className="font-bold text-lg sm:text-xl text-yellow-400">ZealCare</span>
         </Link>
 
         {/* Desktop Menu */}
@@ -226,12 +226,12 @@ export default function Navbar() {
               <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 max-h-[80vh] overflow-y-auto">
                 {/* Image Section */}
                 <div className="relative w-full h-auto min-h-[300px] md:min-h-[400px]">
-                  <div className="relative aspect-4/3 w-full max-w4xl max-auto">
+                  <div className="relative h-[250px] md:h-[300px]">
                   <Image
                     src="/supportive.jpg"  // Use your image path
                     alt="Educational Sponsorship"
                     fill
-                    className="object-cover object-center"
+                    objectFit="contain"
                     sizes="(max-width:768px) 100vw, 1200px"
                     priority
                   />

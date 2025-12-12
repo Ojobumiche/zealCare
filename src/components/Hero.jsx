@@ -15,7 +15,7 @@ export default function Hero() {
         className="absolute inset-0 -z-20"
         style={{
           backgroundImage: "url('/children1.jpg')",
-          backgroundSize: "cover",
+          backgroundSize: "contain",
           backgroundPosition: "center",
           borderImageWidth:"(max-width:768px) 100vw, 1200px"
         }}

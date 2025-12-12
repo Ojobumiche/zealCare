@@ -62,7 +62,7 @@ export default function Home() {
       src="/donateImage.jpg"
       alt="School children learning together"
       fill
-      className="object-cover"
+      objectFit="contain"
       priority
       sizes="(max-width: 768px) 100vw, 50vw"
     />
