@@ -6,11 +6,19 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedProgram, setSelectedProgram] = useState(null);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
   const [isProgramOpen, setIsProgramOpen] = useState(false);
   const [isMobileProgramOpen, setIsMobileProgramOpen] = useState(false);
+
+  // Program menu items
+  const programLinks = [
+    { title: "Educational Sponsorship", href: "/programs#educational-sponsorship" },
+    { title: "Leadership", href: "/programs/leadership" },
+    { title: "Entrepreneurship", href: "/programs/entrepreneurship" },
+    { title: "Career Path in STEM", href: "/programs/career-stem" },
+    { title: "Digital Transformation", href: "/programs/digital-transformation" },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur border-b border-black/6 shadow z-50">
@@ -88,29 +96,14 @@ export default function Navbar() {
                   transition={{ duration: 0.15 }}
                   className="absolute left-0 mt-2 w-60 bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl ring-1 ring-black/5 p-2 z-50"
                 >
-                  <button
-                    onClick={() => {
-                      setSelectedProgram("educational-sponsorship");
-                      setIsProgramOpen(false);
-                    }}
-                    className="w-full text-left px-4 py-2.5 rounded-xl hover:bg-orange-100 transition font-medium"
-                  >
-                    Educational Sponsorship
-                  </button>
-
-                  {[
-                    ["Leadership", "/programs#where-we-operate"],
-                    ["Entrepreneurship", "/programs#our-program"],
-                    ["Career Path in STEM", "/programs#your-questions"],
-                    ["Digital Transformation", "/programs#what-sets-us-apart"],
-                    ["Our Impact", "/programs#our-impact"],
-                  ].map(([title, link]) => (
+                  {programLinks.map((program) => (
                     <Link
-                      key={title}
-                      href={link}
+                      key={program.title}
+                      href={program.href}
                       className="block px-4 py-2.5 rounded-xl hover:bg-zinc-100 transition"
+                      onClick={() => setIsProgramOpen(false)}
                     >
-                      {title}
+                      {program.title}
                     </Link>
                   ))}
                 </motion.div>
@@ -145,159 +138,77 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-white px-4 pb-6 pt-2 space-y-4 text-gray-800 shadow-lg rounded-b-lg max-h-[70vh] overflow-y-auto">
-          <Link href="/" onClick={() => setIsOpen(false)} className="block">Home</Link>
-
-          {/* About Mobile */}
-          <div>
-            <button
-              onClick={() => setIsMobileAboutOpen((s) => !s)}
-              className="w-full flex justify-between px-3 py-3 rounded-md hover:bg-zinc-50"
-            >
-              <span>About Us</span>
-              <svg className={`w-5 h-5 ${isMobileAboutOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            {isMobileAboutOpen && (
-              <div className="mt-2 pl-4 space-y-2">
-                <Link href="/about#about" onClick={() => setIsOpen(false)} className="block">About</Link>
-                <Link href="/about#vision" onClick={() => setIsOpen(false)} className="block">Vision</Link>
-                <Link href="/about#mission" onClick={() => setIsOpen(false)} className="block">Mission</Link>
-                <Link href="/about#core-values" onClick={() => setIsOpen(false)} className="block">Core Value</Link>
-              </div>
-            )}
-          </div>
-
-          {/* Programs Mobile */}
-          <div>
-            <button
-              onClick={() => setIsMobileProgramOpen((s) => !s)}
-              className="w-full flex justify-between px-3 py-3 rounded-md hover:bg-zinc-50"
-            >
-              <span>Programs</span>
-              <svg className={`w-5 h-5 ${isMobileProgramOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            {isMobileProgramOpen && (
-              <div className="mt-2 pl-4 space-y-2">
-                <Link href="/programs#how-we-operate" onClick={() => setIsOpen(false)} className="block">How We Operate</Link>
-                <Link href="/programs#where-we-operate" onClick={() => setIsOpen(false)} className="block">Where We Operate</Link>
-                <Link href="/programs#our-program" onClick={() => setIsOpen(false)} className="block">Our Program</Link>
-                <Link href="/programs#your-questions" onClick={() => setIsOpen(false)} className="block">Your Questions</Link>
-                <Link href="/programs#what-sets-us-apart" onClick={() => setIsOpen(false)} className="block">What Sets Us Apart</Link>
-                <Link href="/programs#our-impact" onClick={() => setIsOpen(false)} className="block">Our Impact</Link>
-              </div>
-            )}
-          </div>
-
-          <Link href="/impact" onClick={() => setIsOpen(false)} className="block">Impact</Link>
-          <Link href="/volunteer" onClick={() => setIsOpen(false)} className="block">Volunteer</Link>
-
-          <Link href="#contact" scroll={true} onClick={() => setIsOpen(false)} className="block">
-            Contact
-          </Link>
-
-          <Link
-            href="/donate"
-            onClick={() => setIsOpen(false)}
-            className="block bg-blue-600 text-white text-center py-3 rounded-md"
-          >
-            Donate
-          </Link>
-        </div>
-      )}
-
-      {/* EDUCATIONAL SPONSORSHIP SECTION (Inline Display) */}
       <AnimatePresence>
-        {selectedProgram === "educational-sponsorship" && (
+        {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden"
+            className="md:hidden bg-white px-4 pb-6 pt-2 space-y-2 text-gray-800 shadow-lg rounded-b-lg overflow-hidden"
           >
-            <div className="container mx-auto px-4 py-8">
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 max-h-[80vh] overflow-y-auto">
-                {/* Image Section */}
-                <div className="relative w-full h-auto min-h-[300px] md:min-h-[400px]">
-                  <div className="relative h-[250px] md:h-[300px]">
-                  <Image
-                    src="/supportive.jpg"  // Use your image path
-                    alt="Educational Sponsorship"
-                    fill
-                    objectFit="contain"
-                    sizes="(max-width:768px) 100vw, 1200px"
-                    priority
-                  />
-                </div>
+            <Link href="/" onClick={() => setIsOpen(false)} className="block px-3 py-3 rounded-md hover:bg-zinc-50">Home</Link>
 
-    {/* Content Section */}
-    <div className="p-6 bg-linear-to-r from-blue-600 to-blue-800 text-white rounded-b-2xl">
-      <div className="mb-6">
-        <h1 className="inline-block text-2xl md:text-3xl font-bold">
-          <span className="bg-yellow-400 text-blue-600 px-4 py-2 rounded-lg shadow-lg">
-            SUPPORTING
-          </span>
-        </h1>
-      </div>
-      
-      <div className="space-y-4">
-        <p className="leading-relaxed text-blue-50">
-          Our Educational Sponsorship Program supports underprivileged children 
-          by providing tuition assistance, school materials, mentorship, and 
-          long-term academic and emotional guidance.
-        </p>
-        
-        <div className="mt-8 pt-6 border-t border-blue-400/30">
-          <h2 className="text-xl md:text-2xl font-bold mb-4 text-yellow-300">
-            Underprivileged children in Liberia
-          </h2>
-          
-          <p className="leading-relaxed text-blue-50">
-            ZealCare is a registered non-profit organization that supports underprivileged 
-            children age 4 to 17 years from low-income families. We help them succeed 
-            academically and develop essential life skills through comprehensive 
-            educational support programs.
-          </p>
-          
-          {/* Optional: Add more content here */}
-          <ul className="mt-4 space-y-2 text-blue-100">
-            <li className="flex items-start">
-              <span className="text-yellow-300 mr-2">•</span>
-              <span>Full tuition coverage for selected students</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-yellow-300 mr-2">•</span>
-              <span>School supplies and learning materials</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-yellow-300 mr-2">•</span>
-              <span>Mentorship and career guidance</span>
-            </li>
-          </ul>
-        
-       {/* Close Button */}
-                  <div className="mt-6 flex justify-end">
-                    <button
-                      onClick={() => setSelectedProgram(null)}
-                      className="px-5 py-2.5 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors font-medium"
-                    >
-                      Donate Now
-                    </button>
-                  </div>
+            {/* About Mobile */}
+            <div>
+              <button
+                onClick={() => setIsMobileAboutOpen((s) => !s)}
+                className="w-full flex justify-between px-3 py-3 rounded-md hover:bg-zinc-50"
+              >
+                <span>About Us</span>
+                <svg className={`w-5 h-5 transition-transform ${isMobileAboutOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {isMobileAboutOpen && (
+                <div className="mt-1 ml-4 space-y-1">
+                  <Link href="/about#about" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md hover:bg-zinc-50">About</Link>
+                  <Link href="/about#vision" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md hover:bg-zinc-50">Vision</Link>
+                  <Link href="/about#mission" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md hover:bg-zinc-50">Mission</Link>
+                  <Link href="/about#core-values" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md hover:bg-zinc-50">Core Value</Link>
                 </div>
-              </div>
+              )}
             </div>
-          </div>
-        </div>
-        </div>
-      </motion.div>
+
+            {/* Programs Mobile */}
+            <div>
+              <button
+                onClick={() => setIsMobileProgramOpen((s) => !s)}
+                className="w-full flex justify-between px-3 py-3 rounded-md hover:bg-zinc-50"
+              >
+                <span>Programs</span>
+                <svg className={`w-5 h-5 transition-transform ${isMobileProgramOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {isMobileProgramOpen && (
+                <div className="mt-1 ml-4 space-y-1">
+                  {programLinks.map((program) => (
+                    <Link
+                      key={program.title}
+                      href={program.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block px-3 py-2 rounded-md hover:bg-zinc-50"
+                    >
+                      {program.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link href="/impact" onClick={() => setIsOpen(false)} className="block px-3 py-3 rounded-md hover:bg-zinc-50">Who we are</Link>
+            <Link href="/contact" onClick={() => setIsOpen(false)} className="block px-3 py-3 rounded-md hover:bg-zinc-50">Contact</Link>
+
+            <Link
+              href="/donate"
+              onClick={() => setIsOpen(false)}
+              className="block bg-blue-600 text-white text-center py-3 rounded-md mt-2"
+            >
+              Donate
+            </Link>
+          </motion.div>
         )}
       </AnimatePresence>
     </nav>
