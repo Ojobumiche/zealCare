@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic"; // This is to tell Next.js NOT to statically prerender this page.
+
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
