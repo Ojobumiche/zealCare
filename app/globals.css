@@ -24,3 +24,39 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.auth-container {
+  max-width: 420px;
+  margin: auto;
+  padding: 2rem;
+  color: white;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-weight: 500;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: #0f766e;
+  color: white;
+  border-radius: 6px;
+}
+
+.divider {
+  text-align: center;
+  margin: 1rem 0;
+  color: #999;
+}
+
+

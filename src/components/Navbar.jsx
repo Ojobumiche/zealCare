@@ -10,6 +10,8 @@ export default function Navbar() {
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
   const [isProgramOpen, setIsProgramOpen] = useState(false);
   const [isMobileProgramOpen, setIsMobileProgramOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isMobileAuthOpen, setIsMobileAuthOpen] = useState(false);
 
   // Program menu items
   const programLinks = [
@@ -83,7 +85,7 @@ export default function Navbar() {
             >
               Programs
               <svg className="w-4 h-4" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
 
@@ -113,6 +115,32 @@ export default function Navbar() {
 
           <Link href="/impact" className="hover:text-blue-600">Who we are</Link>
           <Link href="/contact" className="hover:text-blue-600">Contact</Link>
+          <Link href="/admin" className="hover:text-blue-600">Admin</Link>
+
+          {/* Auth Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setIsAuthOpen(true)}
+            onMouseLeave={() => setIsAuthOpen(false)}
+          >
+            <button
+              aria-expanded={isAuthOpen}
+              className="flex items-center gap-1 hover:text-blue-600"
+              onClick={() => setIsAuthOpen((s) => !s)}
+            >
+              Login
+              <svg className="w-4 h-4" fill="none" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {isAuthOpen && (
+              <div className="absolute left-0 mt-2 w-44 bg-white rounded-md shadow-lg ring-1 ring-black/5 p-2 z-50">
+                <Link href="/login" className="block px-3 py-2 rounded hover:bg-zinc-50">Login</Link>
+                <Link href="/register" className="block px-3 py-2 rounded hover:bg-zinc-50">Register</Link>
+              </div>
+            )}
+          </div>
 
           <Link
             href="/donate"
@@ -200,6 +228,27 @@ export default function Navbar() {
 
             <Link href="/impact" onClick={() => setIsOpen(false)} className="block px-3 py-3 rounded-md hover:bg-zinc-50">Who we are</Link>
             <Link href="/contact" onClick={() => setIsOpen(false)} className="block px-3 py-3 rounded-md hover:bg-zinc-50">Contact</Link>
+            <Link href="/admin" onClick={() => setIsOpen(false)} className="block px-3 py-3 rounded-md hover:bg-zinc-50">Admin</Link>
+
+            {/* Auth Mobile */}
+            <div>
+              <button
+                onClick={() => setIsMobileAuthOpen((s) => !s)}
+                className="w-full flex justify-between px-3 py-3 rounded-md hover:bg-zinc-50"
+              >
+                <span>Login</span>
+                <svg className={`w-5 h-5 transition-transform ${isMobileAuthOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {isMobileAuthOpen && (
+                <div className="mt-1 ml-4 space-y-1">
+                  <Link href="/login" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md hover:bg-zinc-50">Login</Link>
+                  <Link href="/register" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md hover:bg-zinc-50">Register</Link>
+                </div>
+              )}
+            </div>
 
             <Link
               href="/donate"

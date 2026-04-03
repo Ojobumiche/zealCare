@@ -1,41 +1,76 @@
-import nodemailer from "nodemailer";
+import { NextResponse } from "next/server";
+import { Resend } from "resend";
+import connectDB from "@/lib/db";
+import Submission from "@/models/Submission";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request) {
   try {
+    await connectDB();
+
     const data = await request.json();
     const { firstName, lastName, email, feedbackType, message } = data;
 
-    // Configure email transporter (replace with Zealcare email SMTP)
-    const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST, // e.g. "smtp.gmail.com"
-      port: Number(process.env.EMAIL_PORT), //  587
-      secure: process.env.EMAIL_SECURE === "true", // true for 465, false for 587
-      auth: {
-        user: process.env.EMAIL_USER, // Your Zealcare email address
-        pass: process.env.EMAIL_PASS, // App password or SMTP password
-      },
-    });
+    // 1️⃣ Save submission
+   
+    await Submission.create({
+      name: `${firstName} ${lastName}`,
+      email,
+      message,
+      formType: "contact",
+      feedbackType,
+      });
 
-    // Send email
-    await transporter.sendMail({
-      from: `"Zealcare Feedback" <${process.env.EMAIL_USER}>`,
-      to: process.env.ZEALCARE_RECEIVER, // Where you want to receive messages
+    
+    // 2️⃣ Notify Admin
+    await resend.emails.send({
+      from: "ZealCare <onboarding@resend.dev>",
+      to: [process.env.ZEALCARE_RECEIVER],
       subject: `New Feedback: ${feedbackType}`,
-      text: `
-You received new feedback from the Zealcare MVP contact form.
-
-Name: ${firstName} ${lastName}
-Email: ${email}
-Type: ${feedbackType}
-
-Message:
-${message}
+      html: `
+        <h2>New ZealCare Feedback</h2>
+        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Type:</strong> ${feedbackType}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
       `,
     });
 
-    return new Response(JSON.stringify({ success: true }), { status: 200 });
+    // 3️⃣ Confirmation Email to User
+    await resend.emails.send({
+      from: "ZealCare <support@zealcare.org>",
+      to: [email],
+      subject: "We received your message – ZealCare",
+      html: `
+        <p>Dear ${firstName},</p>
+
+        <p>Thank you for reaching out to <strong>ZealCare</strong>.</p>
+
+        <p>We have successfully received your message and our team will review it shortly.</p>
+
+        <p><strong>Your message summary:</strong></p>
+        <blockquote style="border-left:4px solid #2563eb;padding-left:12px;">
+          ${message}
+        </blockquote>
+
+        <p>If your inquiry is urgent, we will contact you as soon as possible.</p>
+
+        <p>Warm regards,<br/>
+        <strong>ZealCare Team</strong></p>
+
+        <hr/>
+        <small>This is an automated confirmation email. Please do not reply.</small>
+      `,
+    });
+
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    console.error("Email sending failed:", error);
-    return new Response(JSON.stringify({ success: false }), { status: 500 });
+    console.error("Contact API error:", error);
+    return NextResponse.json(
+      { success: false, error: "Failed to process request" },
+      { status: 500 }
+    );
   }
 }

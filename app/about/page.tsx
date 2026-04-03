@@ -7,17 +7,17 @@ export default function AboutPage() {
         <section id="about" className="mt-6 text-zinc-700 dark:text-zinc-300 space-y-4">
           <h2 className="text-xl font-semibold">Who we are</h2>
           <p>
-            ZealCare is a Morovia-based non-profit organization founded in 2024 with a mission to uplift underprivileged children from low-income and no-income families.<br/>
+            Zeal Care is a Morovia-based non-profit organization founded in 2024 with a mission to uplift underprivileged children from low-income and no-income families.<br/>
              We believe every child deserves access to quality education, supportive mentorship, and opportunities that empower them to reach their full potential.
               Our work is rooted in the heart of the community. We partner with families, schools, and local leaders to provide children with the resources they need to succeed.<br/>
-               Through our programs—ranging from school support and learning materials to vocational skills training and leadership development — <br/>
+               Through our programs—ranging from school support and learning materials to vocational skills training and leadership development,  <br/>
                we aim to break long-standing barriers and open doors to brighter futures.<br/>
-              At ZealCare, we focus on long-term impact. We help children build confidence, acquire practical skills, and develop a strong foundation <br/>
+              At Zeal Care, we focus on long-term impact. We help children build confidence, acquire practical skills, and develop a strong foundation <br/>
               for personal and academic growth. Our approach ensures that empowerment is not temporary, but lasting.
               Together with our supporters and partners, we are shaping a future where every child has the chance to learn,<br/>
                thrive, and contribute meaningfully to their community.<br/>
                 Join us in making a difference—one child at a time.<br/>
-                <strong>ZealCare — Empowering children. Transforming futures.</strong>
+                <strong>Zeal Care Empowering children. Transforming futures.</strong>
           </p>
         </section>
 

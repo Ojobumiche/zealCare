@@ -5,6 +5,7 @@ export default function ContactPage() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -18,12 +19,13 @@ export default function ContactPage() {
       message: e.target.message.value,
     };
     try {
+      
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+      
      if (res.ok) {
       setStatus("Message sent successfully!");
       e.target.reset();
@@ -134,3 +136,8 @@ export default function ContactPage() {
     </div>
   );
 }
+
+
+
+
+
